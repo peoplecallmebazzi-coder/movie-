@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmanBook Luxe - Royal Omani Experience Directory</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Noto+Sans+Arabic:wght@400;600;700&family=Noto+Sans+Malayalam:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Sans+Tamil:wght@400;600;700&family=Noto+Sans+Bengali:wght@400;600;700&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            100: '#FFF6D6',
+                            300: '#FCE082',
+                            400: '#F2CA52',
+                            500: '#D4AF37', // Royal Metallic Gold
+                            600: '#AA8518',
+                            700: '#80610E'
+                        },
+                        obsidian: {
+                            950: '#05060A',
+                            900: '#0B0D14',
+                            850: '#111420',
+                            800: '#181C2B',
+                            700: '#23283B'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Cinzel', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        arabic: ['Noto Sans Arabic', 'sans-serif'],
+                        malayalam: ['Noto Sans Malayalam', 'sans-serif'],
+                        hindi: ['Noto Sans Devanagari', 'sans-serif'],
+                        tamil: ['Noto Sans Tamil', 'sans-serif'],
+                        bengali: ['Noto Sans Bengali', 'sans-serif'],
+                        urdu: ['Noto Nastaliq Urdu', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #05060A;
+            color: #F3F4F6;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #FFF0B3 0%, #D4AF37 50%, #997A15 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-border-card {
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            background: rgba(17, 20, 32, 0.75);
+            backdrop-filter: blur(16px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .gold-border-card:hover {
+            border-color: rgba(212, 175, 55, 0.8);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2), 0 0 15px rgba(212, 175, 55, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .btn-gold-royal {
+            background: linear-gradient(135deg, #D4AF37 0%, #AA8518 100%);
+            color: #05060A;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-gold-royal:hover {
+            background: linear-gradient(135deg, #F2CA52 0%, #D4AF37 100%);
+            box-shadow: 0 6px 25px rgba(212, 175, 55, 0.5);
+            transform: scale(1.02);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #05060A;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #181C2B;
+            border-radius: 4px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D4AF37;
+        }
+    </style>
+</head>
+<body class="selection:bg-gold-500 selection:text-obsidian-950">
+
+    <header class="sticky top-0 z-50 bg-obsidian-900/90 backdrop-blur-md border-b border-gold-500/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Brand Logo -->
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-gold-600 via-gold-400 to-gold-100 flex items-center justify-center shadow-lg shadow-gold-500/20 border border-gold-300">
+                    <i class="fa-solid fa-crown text-obsidian-950 text-lg"></i>
+                </div>
+                <div>
+                    <span class="font-serif font-black text-2xl tracking-wider gold-gradient-text">OMANBOOK</span>
+                    <span class="block text-[10px] uppercase font-bold tracking-[0.25em] text-gold-400/80 -mt-1">LUXE DIRECTORY</span>
+                </div>
+            </div>
+
+            <!-- Language & Location Controls -->
+            <div class="flex items-center space-x-3 sm:space-x-4">
+                
+                <!-- Language Selector Dropdown -->
+                <div class="flex items-center space-x-2 bg-obsidian-850 px-3 py-2 rounded-xl border border-gold-500/30">
+                    <i class="fa-solid fa-language text-gold-400 text-sm"></i>
+                    <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-transparent text-xs font-semibold text-gold-300 focus:outline-none cursor-pointer">
+                        <option value="en" class="bg-obsidian-900 text-gray-200">English</option>
+                        <option value="ar" class="bg-obsidian-900 text-gray-200">العربية (Arabic)</option>
+                        <option value="ml" class="bg-obsidian-900 text-gray-200">മലയാളം (Malayalam)</option>
+                        <option value="hi" class="bg-obsidian-900 text-gray-200">हिन्दी (Hindi)</option>
+                        <option value="ta" class="bg-obsidian-900 text-gray-200">தமிழ் (Tamil)</option>
+                        <option value="bn" class="bg-obsidian-900 text-gray-200">বাংলা (Bengali)</option>
+                        <option value="ur" class="bg-obsidian-900 text-gray-200">اردو (Urdu)</option>
+                    </select>
+                </div>
+
+                <!-- Region Switcher -->
+                <div class="hidden sm:flex items-center space-x-2 bg-obsidian-850 px-3 py-2 rounded-xl border border-gold-500/30">
+                    <i class="fa-solid fa-location-dot text-gold-400 text-sm"></i>
+                    <select id="locationSelect" class="bg-transparent text-xs font-semibold text-gold-300 focus:outline-none cursor-pointer">
+                        <option value="all" class="bg-obsidian-900 text-gray-200">All Oman</option>
+                        <option value="muscat" class="bg-obsidian-900 text-gray-200" selected>Muscat</option>
+                        <option value="salalah" class="bg-obsidian-900 text-gray-200">Salalah</option>
+                        <option value="sohar" class="bg-obsidian-900 text-gray-200">Sohar</option>
+                        <option value="nizwa" class="bg-obsidian-900 text-gray-200">Nizwa</option>
+                    </select>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <section class="relative min-h-[480px] flex items-center justify-center py-16 px-4 overflow-hidden border-b border-gold-500/10">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-obsidian-800/80 via-obsidian-950 to-obsidian-950 pointer-events-none"></div>
+        <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[550px] h-[550px] bg-gold-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <div class="relative z-10 max-w-4xl mx-auto text-center space-y-6">
+            <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-300 text-xs font-semibold tracking-wider uppercase backdrop-blur-md">
+                <i class="fa-solid fa-award text-gold-400"></i>
+                <span id="heroBadge">Oman's Royal Entertainment Portal</span>
+            </div>
+
+            <h1 class="font-serif font-black text-3xl sm:text-5xl lg:text-6xl tracking-tight text-white leading-tight">
+                <span id="heroTitleMain">Royal Omani Entertainment</span> <br>
+                <span class="gold-gradient-text" id="heroTitleSub">Direct Booking Directory</span>
+            </h1>
+
+            <p id="heroDesc" class="text-gray-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed font-light">
+                Direct access to premier movie theaters, VIP lounges, Onam feasts, and cultural concerts across Oman. Instant redirection to official venue portals without payment delays.
+            </p>
+
+            <div class="pt-2 flex flex-wrap justify-center gap-3">
+                <a href="#cinemas" class="px-5 py-2.5 rounded-xl bg-obsidian-850 hover:border-gold-500/60 text-xs font-semibold text-gray-200 hover:text-gold-300 transition-all flex items-center gap-2 border border-white/10">
+                    <i class="fa-solid fa-clapperboard text-gold-400"></i> <span id="chipCinemas">Cinema Portals</span>
+                </a>
+                <a href="#events" class="px-5 py-2.5 rounded-xl bg-obsidian-850 hover:border-gold-500/60 text-xs font-semibold text-gray-200 hover:text-gold-300 transition-all flex items-center gap-2 border border-white/10">
+                    <i class="fa-solid fa-gem text-gold-400"></i> <span id="chipEvents">Onam & Cultural Shows</span>
+                </a>
+                <a href="#dining" class="px-5 py-2.5 rounded-xl bg-obsidian-850 hover:border-gold-500/60 text-xs font-semibold text-gray-200 hover:text-gold-300 transition-all flex items-center gap-2 border border-white/10">
+                    <i class="fa-solid fa-utensils text-gold-400"></i> <span id="chipDining">Luxury Experiences</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-20">
+
+        <!-- CINEMA THEATERS SECTION -->
+        <section id="cinemas" class="space-y-8 scroll-mt-28">
+            <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-gold-500/20 pb-4">
+                <div>
+                    <div class="text-gold-400 text-xs font-bold tracking-widest uppercase mb-1">
+                        <i class="fa-solid fa-ticket mr-1"></i> <span id="cinemasCategory">Cinema Theaters</span>
+                    </div>
+                    <h2 class="font-serif font-bold text-2xl sm:text-3xl text-white">
+                        <span id="cinemasTitle">Oman Official Movie Venues</span> <span class="gold-gradient-text">(Direct Links)</span>
+                    </h2>
+                </div>
+                <p id="cinemasSub" class="text-xs text-gray-400 mt-2 md:mt-0 font-light">
+                    Clicking opens official theater websites directly in a new tab.
+                </p>
+            </div>
+
+            <!-- Cinema Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                <!-- VOX CINEMAS -->
+                <div class="gold-border-card rounded-2xl overflow-hidden flex flex-col justify-between group">
+                    <div class="h-48 bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=800&q=80');">
+                        <div class="absolute inset-0 bg-gradient-to-t from-obsidian-900 via-obsidian-900/40 to-transparent"></div>
+                        <span class="absolute top-3 left-3 bg-obsidian-950/90 text-gold-300 text-[10px] font-bold px-3 py-1 rounded-full border border-gold-500/40 tracking-wider">
+                            IMAX / MAX / GOLD
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <div>
+                            <h3 class="font-serif font-bold text-xl text-white group-hover:text-gold-300 transition-colors">VOX Cinemas Oman</h3>
+                            <p id="descVox" class="text-xs text-gray-400 mt-2 leading-relaxed">
+                                Mall of Oman, City Centre Muscat, Qurum, Suhar & Salalah.
+                            </p>
+                        </div>
+                        <a href="https://oman.voxcinemas.com" target="_blank" rel="noopener noreferrer" class="btn-gold-royal w-full py-3 rounded-xl text-center text-xs font-bold flex items-center justify-center space-x-2">
+                            <span id="btnVox">Open VOX Website</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- CINEPOLIS CINEMAS -->
+                <div class="gold-border-card rounded-2xl overflow-hidden flex flex-col justify-between group">
+                    <div class="h-48 bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=800&q=80');">
+                        <div class="absolute inset-0 bg-gradient-to-t from-obsidian-900 via-obsidian-900/40 to-transparent"></div>
+                        <span class="absolute top-3 left-3 bg-obsidian-950/90 text-gold-300 text-[10px] font-bold px-3 py-1 rounded-full border border-gold-500/40 tracking-wider">
+                            LUXURY VIP SUITES
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <div>
+                            <h3 class="font-serif font-bold text-xl text-white group-hover:text-gold-300 transition-colors">Cinépolis Oman</h3>
+                            <p id="descCinepolis" class="text-xs text-gray-400 mt-2 leading-relaxed">
+                                Oman Avenues Mall (Muscat) & Salalah Grand Mall.
+                            </p>
+                        </div>
+                        <a href="https://oman.cinepolisgulf.com" target="_blank" rel="noopener noreferrer" class="btn-gold-royal w-full py-3 rounded-xl text-center text-xs font-bold flex items-center justify-center space-x-2">
+                            <span id="btnCinepolis">Open Cinépolis</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- NOVO CINEMAS -->
+                <div class="gold-border-card rounded-2xl overflow-hidden flex flex-col justify-between group">
+                    <div class="h-48 bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&q=80');">
+                        <div class="absolute inset-0 bg-gradient-to-t from-obsidian-900 via-obsidian-900/40 to-transparent"></div>
+                        <span class="absolute top-3 left-3 bg-obsidian-950/90 text-gold-300 text-[10px] font-bold px-3 py-1 rounded-full border border-gold-500/40 tracking-wider">
+                            7-STAR EXPERIENCE
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <div>
+                            <h3 class="font-serif font-bold text-xl text-white group-hover:text-gold-300 transition-colors">Novo Cinemas</h3>
+                            <p id="descNovo" class="text-xs text-gray-400 mt-2 leading-relaxed">
+                                Muscat Grand Mall (MGM) - Premier Screenings.
+                            </p>
+                        </div>
+                        <a href="https://www.novocinemas.com" target="_blank" rel="noopener noreferrer" class="btn-gold-royal w-full py-3 rounded-xl text-center text-xs font-bold flex items-center justify-center space-x-2">
+                            <span id="btnNovo">Open Novo Website</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- AL BAHJA CINEMA -->
+                <div class="gold-border-card rounded-2xl overflow-hidden flex flex-col justify-between group">
+                    <div class="h-48 bg-cover bg-center relative" style="background-image: url('https://images.unsplash.com/photo-1518173946687-a4c8a383392e?w=800&q=80');">
+                        <div class="absolute inset-0 bg-gradient-to-t from-obsidian-900 via-obsidian-900/40 to-transparent"></div>
+                        <span class="absolute top-3 left-3 bg-obsidian-950/90 text-gold-300 text-[10px] font-bold px-3 py-1 rounded-full border border-gold-500/40 tracking-wider">
+                            REGIONAL SHOWS
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <div>
+                            <h3 class="font-serif font-bold text-xl text-white group-hover:text-gold-300 transition-colors">Al Bahja Cinema</h3>
+                            <p id="descBahja" class="text-xs text-gray-400 mt-2 leading-relaxed">
+                                Markaz Al Bahja - Seeb & Ruwi Centre.
+                            </p>
+                        </div>
+                        <a href="https://markazalbahja.com/al-bahja-cinema/" target="_blank" rel="noopener noreferrer" class="btn-gold-royal w-full py-3 rounded-xl text-center text-xs font-bold flex items-center justify-center space-x-2">
+                            <span id="btnBahja">Open Al Bahja Site</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="events" class="space-y-8 scroll-mt-28">
+            <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-gold-500/20 pb-4">
+                <div>
+                    <div class="text-amber-400 text-xs font-bold tracking-widest uppercase mb-1">
+                        <i class="fa-solid fa-spa mr-1"></i> <span id="eventsCategory">Festival Special Booking</span>
+                    </div>
+                    <h2 class="font-serif font-bold text-2xl sm:text-3xl text-white">
+                        <span id="eventsTitle">Onam Celebrations & Shows</span> <span class="text-amber-400">(Official Tickets)</span>
+                    </h2>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                <!-- GRAND ONASADYA -->
+                <div class="gold-border-card rounded-2xl border-amber-500/30 p-6 flex flex-col sm:flex-row gap-6 items-center">
+                    <div class="w-full sm:w-2/5 h-48 rounded-xl bg-cover bg-center shrink-0 border border-amber-500/20" style="background-image: url('https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?w=800&q=80');"></div>
+                    <div class="space-y-3 flex-1">
+                        <span class="inline-block px-3 py-1 rounded-full bg-amber-500/10 text-amber-300 text-[10px] font-bold uppercase tracking-wider border border-amber-500/30">
+                            SHERATON HOTEL MUSCAT
+                        </span>
+                        <h3 class="font-serif font-bold text-xl text-white">The Ultimate Grand OnaSadya</h3>
+                        <p id="descSadya" class="text-xs text-gray-300 font-light leading-relaxed">
+                            Reserve tickets directly for the authentic royal Onam Sadya feast at Sheraton Hotel Muscat.
+                        </p>
+                        <a href="https://muscat.platinumlist.net/event-tickets/107725/the-ultimate-grand-onasadya" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-500 to-yellow-600 text-obsidian-950 font-bold px-5 py-2.5 rounded-xl text-xs hover:from-amber-400 hover:to-yellow-500 transition-all shadow-lg shadow-amber-500/20">
+                            <span id="btnSadya">Book Sadya Ticket</span>
+                            <i class="fa-solid fa-arrow-right text-[11px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ONAM CULTURAL SHOW -->
+                <div class="gold-border-card rounded-2xl border-amber-500/30 p-6 flex flex-col sm:flex-row gap-6 items-center">
+                    <div class="w-full sm:w-2/5 h-48 rounded-xl bg-cover bg-center shrink-0 border border-amber-500/20" style="background-image: url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80');"></div>
+                    <div class="space-y-3 flex-1">
+                        <span class="inline-block px-3 py-1 rounded-full bg-amber-500/10 text-amber-300 text-[10px] font-bold uppercase tracking-wider border border-amber-500/30">
+                            AL FALAJ HOTEL / CONCERT
+                        </span>
+                        <h3 class="font-serif font-bold text-xl text-white">Onam Musical & Cultural Show</h3>
+                        <p id="descConcert" class="text-xs text-gray-300 font-light leading-relaxed">
+                            Official ticket bookings for the star-studded Onam musical concert and cultural evening.
+                        </p>
+                        <a href="https://muscat.platinumlist.net/event-tickets/107727/the-ultimate-onam-banger" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-500 to-yellow-600 text-obsidian-950 font-bold px-5 py-2.5 rounded-xl text-xs hover:from-amber-400 hover:to-yellow-500 transition-all shadow-lg shadow-amber-500/20">
+                            <span id="btnConcert">Book Show Ticket</span>
+                            <i class="fa-solid fa-arrow-right text-[11px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="dining" class="space-y-8 scroll-mt-28">
+            <div class="border-b border-gold-500/20 pb-4">
+                <div class="text-gold-400 text-xs font-bold tracking-widest uppercase mb-1">
+                    <i class="fa-solid fa-crown mr-1"></i> <span id="luxuryCategory">High Life & Fine Arts</span>
+                </div>
+                <h2 class="font-serif font-bold text-2xl sm:text-3xl text-white">
+                    <span id="luxuryTitle">Royal Opera & Luxury Venues</span> <span class="gold-gradient-text">(Official Sites)</span>
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <!-- ROYAL OPERA HOUSE -->
+                <div class="gold-border-card p-6 rounded-2xl space-y-4 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="w-12 h-12 rounded-full bg-gold-500/10 flex items-center justify-center border border-gold-500/30">
+                            <i class="fa-solid fa-building-columns text-gold-400 text-xl"></i>
+                        </div>
+                        <h3 class="font-serif font-bold text-lg text-white">Royal Opera House Muscat</h3>
+                        <p id="descOpera" class="text-xs text-gray-400 leading-relaxed">
+                            Official portal for world-class opera performances and music events in Oman.
+                        </p>
+                    </div>
+                    <a href="https://www.rohmuscat.org.om" target="_blank" rel="noopener noreferrer" class="btn-gold-royal py-2.5 rounded-xl text-center text-xs font-bold block">
+                        ROHM Official Site ↗
+                    </a>
+                </div>
+
+                <!-- AL BUSTAN PALACE DINING -->
+                <div class="gold-border-card p-6 rounded-2xl space-y-4 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="w-12 h-12 rounded-full bg-gold-500/10 flex items-center justify-center border border-gold-500/30">
+                            <i class="fa-solid fa-utensils text-gold-400 text-xl"></i>
+                        </div>
+                        <h3 class="font-serif font-bold text-lg text-white">Al Bustan Palace Dining</h3>
+                        <p id="descBustan" class="text-xs text-gray-400 leading-relaxed">
+                            Luxury dining reservations at Ritz-Carlton Muscat.
+                        </p>
+                    </div>
+                    <a href="https://www.ritzcarlton.com/en/hotels/mctrz-al-bustan-palace-a-ritz-carlton-hotel/dining/" target="_blank" rel="noopener noreferrer" class="btn-gold-royal py-2.5 rounded-xl text-center text-xs font-bold block">
+                        Reserve Dining ↗
+                    </a>
+                </div>
+
+                <!-- OMAN AIR PORTAL -->
+                <div class="gold-border-card p-6 rounded-2xl space-y-4 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="w-12 h-12 rounded-full bg-gold-500/10 flex items-center justify-center border border-gold-500/30">
+                            <i class="fa-solid fa-plane-departure text-gold-400 text-xl"></i>
+                        </div>
+                        <h3 class="font-serif font-bold text-lg text-white">Oman Air First & Business</h3>
+                        <p id="descOmanAir" class="text-xs text-gray-400 leading-relaxed">
+                            Official booking for premium flights with national carrier Oman Air.
+                        </p>
+                    </div>
+                    <a href="https://www.omanair.com" target="_blank" rel="noopener noreferrer" class="btn-gold-royal py-2.5 rounded-xl text-center text-xs font-bold block">
+                        Oman Air Portal ↗
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-obsidian-900 border-t border-gold-500/20 py-10 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-full bg-gold-500/20 flex items-center justify-center border border-gold-500/40">
+                    <i class="fa-solid fa-crown text-gold-400 text-sm"></i>
+                </div>
+                <div>
+                    <span class="font-serif font-bold text-lg text-white">OMANBOOK LUXE</span>
+                    <p class="text-[11px] text-gray-400">Direct Official Links to Oman's Fine Venues</p>
+                </div>
+            </div>
+
+            <p class="text-xs text-gray-500 text-center font-light">
+                © 2026 OmanBook Luxe. All links open directly in official venue portals.
+            </p>
+
+            <div class="flex space-x-4 text-gray-400 text-sm">
+                <a href="#cinemas" class="hover:text-gold-400"><i class="fa-solid fa-film"></i></a>
+                <a href="#events" class="hover:text-gold-400"><i class="fa-solid fa-gem"></i></a>
+                <a href="#dining" class="hover:text-gold-400"><i class="fa-solid fa-utensils"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Multilingual Translations Script -->
+    <script>
+        const i18n = {
+            en: {
+                heroBadge: "Oman's Royal Entertainment Portal",
+                heroTitleMain: "Royal Omani Entertainment",
+                heroTitleSub: "Direct Booking Directory",
+                heroDesc: "Direct access to premier movie theaters, VIP lounges, Onam feasts, and cultural concerts across Oman. Instant redirection to official venue portals without payment delays.",
+                chipCinemas: "Cinema Portals",
+                chipEvents: "Onam & Cultural Shows",
+                chipDining: "Luxury Experiences",
+                cinemasCategory: "Cinema Theaters",
+                cinemasTitle: "Oman Official Movie Venues",
+                cinemasSub: "Clicking opens official theater websites directly in a new tab.",
+                btnVox: "Open VOX Website",
+                btnCinepolis: "Open Cinépolis",
+                btnNovo: "Open Novo Website",
+                btnBahja: "Open Al Bahja Site",
+                descVox: "Mall of Oman, City Centre Muscat, Qurum, Suhar & Salalah.",
+                descCinepolis: "Oman Avenues Mall (Muscat) & Salalah Grand Mall.",
+                descNovo: "Muscat Grand Mall (MGM) - Premier Screenings.",
+                descBahja: "Markaz Al Bahja - Seeb & Ruwi Centre.",
+                eventsCategory: "Festival Special Booking",
+                eventsTitle: "Onam Celebrations & Shows",
+                btnSadya: "Book Sadya Ticket",
+                btnConcert: "Book Show Ticket",
+                descSadya: "Reserve tickets directly for the authentic royal Onam Sadya feast at Sheraton Hotel Muscat.",
+                descConcert: "Official ticket bookings for the star-studded Onam musical concert and cultural evening.",
+                luxuryCategory: "High Life & Fine Arts",
+                luxuryTitle: "Royal Opera & Luxury Venues",
+                descOpera: "Official portal for world-class opera performances and music events in Oman.",
+                descBustan: "Luxury dining reservations at Ritz-Carlton Muscat.",
+                descOmanAir: "Official booking for premium flights with national carrier Oman Air."
+            },
+            ar: {
+                heroBadge: "بوابة الترفيه الملكية في عمان",
+                heroTitleMain: "دليل الترفيه العماني الفاخر",
+                heroTitleSub: "روابط الحجز المباشرة",
+                heroDesc: "وصول مباشر إلى أفخم دور السينما، وقاعات VIP، وولائم أونام، والحفلات الموسيقية في سلطنة عمان. إعادة توجيه فورية إلى المواقع الرسمية.",
+                chipCinemas: "دور السينما",
+                chipEvents: "حفلات أونام الثقافية",
+                chipDining: "تجارب فاخرة",
+                cinemasCategory: "دور السينما",
+                cinemasTitle: "دور السينما الرسمية في عمان",
+                cinemasSub: "الانتقال المباشر إلى الموقع الرسمي للسينما بنقرة واحدة.",
+                btnVox: "افتح موقع فوكس سينما",
+                btnCinepolis: "افتح سينيبوليس",
+                btnNovo: "افتح موقع نوفو سينما",
+                btnBahja: "افتح موقع سينما البهجة",
+                descVox: "مول عمان، سيتي سنتر مسقط، القرم، صحار وصلالة.",
+                descCinepolis: "عمان أفينيو مول (مسقط) وصلالة جراند مول.",
+                descNovo: "مسقط جراند مول - عروض ممتازة.",
+                descBahja: "مركز البهجة - السيب والروي.",
+                eventsCategory: "حجوزات المهرجانات الخاصة",
+                eventsTitle: "احتفالات وعروض أونام",
+                btnSadya: "احجز تذكرة الساديا",
+                btnConcert: "احجز تذكرة العرض",
+                descSadya: "احجز تذاكر وليمة أونام ساديا الملكية في فندق شيراتون مسقط مباشرة.",
+                descConcert: "حجز التذاكر الرسمية للحفل الموسيقي والأمسية الثقافية بمناسبة أونام.",
+                luxuryCategory: "الفنون والرفاهية",
+                luxuryTitle: "دار الأوبرا السلطانية والأماكن الفاخرة",
+                descOpera: "البوابة الرسمية لعروض الأوبرا والفعاليات الموسيقية العالمية في عمان.",
+                descBustan: "حجوزات المطاعم الفاخرة في فندق قصر البستان ريتز كارلتون.",
+                descOmanAir: "الحجز الرسمي للرحلات الفاخرة على الطيران العماني."
+            },
+            ml: {
+                heroBadge: "ഒമാനിലെ പ്രീമിയം എന്റർടെയ്ൻമെന്റ് പോർട്ടൽ",
+                heroTitleMain: "റോയൽ ഒമാനി എന്റർടെയ്ൻമെന്റ്",
+                heroTitleSub: "ഔദ്യോഗിക ഡയറക്റ്റ് ലിങ്കുകൾ",
+                heroDesc: "ഒമാനിലെ പ്രമുഖ തിയേറ്ററുകൾ, വിഐപി ലാഞ്ചുകൾ, ഓണം സദ്യ, കൾച്ചറൽ പ്രോഗ്രാമുകൾ എന്നിവയുടെ ഔദ്യോഗിക ബുക്കിംഗ് സൈറ്റുകളിലേക്ക് നേരിട്ട് പ്രവേശിക്കൂ.",
+                chipCinemas: "തിയേറ്റർ ലിങ്കുകൾ",
+                chipEvents: "ഓണം & ഈവെന്റുകൾ",
+                chipDining: "റോയൽ എക്സ്പീരിയൻസ്",
+                cinemasCategory: "സിനിമ തിയേറ്ററുകൾ",
+                cinemasTitle: "ഒമാനിലെ പ്രധാന തിയേറ്ററുകൾ",
+                cinemasSub: "ക്ലിക്ക് ചെയ്താൽ തത്സമയം അതത് തിയേറ്ററിന്റെ ഔദ്യോഗിക പേജിലേക്ക് പോകും.",
+                btnVox: "VOX വെബ്‌സൈറ്റിലേക്ക്",
+                btnCinepolis: "Cinépolis സൈറ്റിലേക്ക്",
+                btnNovo: "Novo വെബ്‌സൈറ്റിലേക്ക്",
+                btnBahja: "Al Bahja സൈറ്റിലേക്ക്",
+                descVox: "മോൾ ഓഫ് ഒമാൻ, സിറ്റി സെന്റർ മസ്‌കറ്റ്, കുറും, സോഹാർ, സലാല.",
+                descCinepolis: "ഒമാൻ അവന്യൂസ് മോൾ (മസ്‌കറ്റ്) & സലാല ഗ്രാൻഡ് മോൾ.",
+                descNovo: "മസ്‌കറ്റ് ഗ്രാൻഡ് മോൾ (MGM).",
+                descBahja: "മാർക്കസ് അൽ ബഹ്ജ - സീബ് & റൂവി.",
+                eventsCategory: "സ്പെഷ്യൽ ഫെസ്റ്റിവൽ ബുക്കിംഗ്",
+                eventsTitle: "ഓണം ആഘോഷങ്ങൾ & പ്രോഗ്രാമുകൾ",
+                btnSadya: "സദ്യ ടിക്കറ്റ് ബുക്ക് ചെയ്യാം",
+                btnConcert: "ഷോ ടിക്കറ്റ് ബുക്ക് ചെയ്യാം",
+                descSadya: "മസ്‌കറ്റ് ഷെറാട്ടൺ ഹോട്ടലിലെ റോയൽ ഓണം സദ്യ മുൻകൂട്ടി ബുക്ക് ചെയ്യാം.",
+                descConcert: "പ്രശസ്ത കലാകാരന്മാർ അണിനിരക്കുന്ന ഓണം മ്യൂസിക് & കൾച്ചറൽ നൈറ്റ് ടിക്കറ്റ്.",
+                luxuryCategory: "റോയൽ ലൈഫ് & ആർട്സ്",
+                luxuryTitle: "റോയൽ ഒപെറ & പ്രീമിയം ലൊക്കേഷനുകൾ",
+                descOpera: "റോയൽ ഒപെറ ഹൗസ് മസ്‌കറ്റ് ഔദ്യോഗിക പോർട്ടൽ.",
+                descBustan: "അൽ ബുസ്താൻ പാലസ് റൂഫ്‌ടോപ്പ് ഫൈൻ ഡൈനിംഗ്.",
+                descOmanAir: "ഒമാൻ എയർ ഔദ്യോഗിക പ്രീമിയം ബുക്കിംഗ്."
+            },
+            hi: {
+                heroBadge: "ओमान का रॉयल एंटरटेनमेंट पोर्टल",
+                heroTitleMain: "रॉयल ओमान मनोरंजन",
+                heroTitleSub: "डायरेक्ट बुकिंग डायरेक्टरी",
+                heroDesc: "ओमान के प्रमुख सिनेमाघरों, वीआईपी लाउंज, ओणम दावतों और सांस्कृतिक शो के आधिकारिक बुकिंग पोर्टल पर सीधा प्रवेश।",
+                chipCinemas: "सिनेमा पोर्टल",
+                chipEvents: "ओणम और सांस्कृतिक शो",
+                chipDining: "लक्जरी अनुभव",
+                cinemasCategory: "सिनेमा हॉल",
+                cinemasTitle: "ओमान के आधिकारिक सिनेमा घर",
+                cinemasSub: "क्लिक करने पर सीधे आधिकारिक सिनेमा वेबसाइट नए टैब में खुलेगी।",
+                btnVox: "VOX वेबसाइट खोलें",
+                btnCinepolis: "Cinépolis खोलें",
+                btnNovo: "Novo वेबसाइट खोलें",
+                btnBahja: "Al Bahja साइट खोलें",
+                descVox: "मॉल ऑफ ओमान, सिटी सेंटर मस्कट, कुरम, सोहार और सलालाह।",
+                descCinepolis: "ओमान एवेन्यूज मॉल (मस्कट) और सलालाह ग्रैंड मॉल।",
+                descNovo: "मस्कट ग्रैंड मॉल (MGM) - प्रीमियर स्क्रीन।",
+                descBahja: "मरकज अल बहजा - सीब और रुवी सेंटर।",
+                eventsCategory: "त्योहार विशेष बुकिंग",
+                eventsTitle: "ओणम उत्सव और शो टिकट",
+                btnSadya: "सादिया टिकट बुक करें",
+                btnConcert: "शो टिकट बुक करें",
+                descSadya: "शेरटन होटल मस्कट में शाही ओणम सादिया दावत के लिए टिकट बुक करें।",
+                descConcert: "ओणम संगीतमय संगीत कार्यक्रम और सांस्कृतिक शाम के लिए आधिकारिक टिकट।",
+                luxuryCategory: "शाही कला और लक्जरी",
+                luxuryTitle: "रॉयल ओपेरा हाउस और लक्जरी स्थल",
+                descOpera: "ओमान में विश्व स्तरीय ओपेरा प्रदर्शन के लिए आधिकारिक पोर्टल।",
+                descBustan: "रिट्ज़-कार्लटन मस्कट में लक्जरी डाइनिंग आरक्षण।",
+                descOmanAir: "राष्ट्रीय विमान सेवा ओमान एयर के साथ प्रीमियम बुकिंग।"
+            },
+            ta: {
+                heroBadge: "ஓமானின் பிரீமியம் பொழுதுபோக்கு தளம்",
+                heroTitleMain: "ராயல் ஓமான் விஐபி டைரக்டரி",
+                heroTitleSub: "நேரடி முன்பதிவு லிங்க்",
+                heroDesc: "ஓமானின் சிறந்த திரையரங்குகள், விஐபி லவுஞ்ச்கள், ஓணம் விருந்து மற்றும் கலாச்சார நிகழ்ச்சிகளின் அதிகாரப்பூர்வ தளங்களுக்கு நேரடியாகச் செல்லுங்கள்.",
+                chipCinemas: "திரையரங்குகள்",
+                chipEvents: "ஓணம் மற்றும் கலை நிகழ்ச்சிகள்",
+                chipDining: "பிரீமியம் அனுபவங்கள்",
+                cinemasCategory: "திரையரங்குகள்",
+                cinemasTitle: "ஓமான் அதிகாரப்பூர்வ திரையரங்குகள்",
+                cinemasSub: "கிளிக் செய்தால் நேரடியாக அதிகாரப்பூர்வ தளம் புதிய டேப்பில் திறக்கும்.",
+                btnVox: "VOX தளத்திற்குச் செல்க",
+                btnCinepolis: "Cinépolis திறக்க",
+                btnNovo: "Novo தளத்திற்குச் செல்க",
+                btnBahja: "Al Bahja தளத்திற்குச் செல்க",
+                descVox: "மால் ஆஃப் ஓமான், சிட்டி சென்டர் மஸ்கட், குரம்ப, சோஹார் மற்றும் சலாலா.",
+                descCinepolis: "ஓமான் அவென்யூஸ் மால் (மஸ்கட்) & சலாலா கிராண்ட் மால்.",
+                descNovo: "மஸ்கட் கிராண்ட் மால் (MGM).",
+                descBahja: "மர்கஸ் அல் பஹ்ஜா - சீப் மற்றும் ரூவி.",
+                eventsCategory: "சிறப்பு விழா முன்பதிவு",
+                eventsTitle: "ஓணம் கொண்டாட்டங்கள் & டிக்கெட்டுகள்",
+                btnSadya: "சத்யா டிக்கெட் முன்பதிவு",
+                btnConcert: "நிகழ்ச்சி டிக்கெட் முன்பதிவு",
+                descSadya: "ஷெரட்டன் ஹோட்டல் மஸ்கட்டில் ராயல் ஓணம் சத்யா விருந்து முன்பதிவு செய்ய.",
+                descConcert: "பிரபலங்களின் ஓணம் இசை மற்றும் கலாச்சார நிகழ்ச்சி டிக்கெட்டுகள்.",
+                luxuryCategory: "ராயல் கலை & உணவு",
+                luxuryTitle: "ராயல் ஒப்பேரா ஹவுஸ் & விஐபி இடங்கள்",
+                descOpera: "ஓமான் ராயல் ஒப்பேரா ஹவுஸ் அதிகாரப்பூர்வ தளம்.",
+                descBustan: "ரிட்ஸ்-கார்ல்டன் மஸ்கட் ஹோட்டலில் சிறப்பு உணவு முன்பதிவு.",
+                descOmanAir: "ஓமான் ஏர் பிரீமியம் விமான முன்பதிவு தளம்."
+            },
+            bn: {
+                heroBadge: "ওমানের রাজকীয় বিনোদন পোর্টাল",
+                heroTitleMain: "রয়্যাল ওমানি এন্টারটেইনমেন্ট",
+                heroTitleSub: "ডাইরেক্ট বুকিং ডিরেক্টরি",
+                heroDesc: "ওমানের সেরা সিনেমা হল, ভিআইপি লাউঞ্জ, অনম ভোজ এবং সাংস্কৃতিক অনুষ্ঠানের অফিসিয়াল ওয়েবসাইটে সরাসরি প্রবেশ করুন।",
+                chipCinemas: "সিনেমা পোর্টাল",
+                chipEvents: "অনম ও সাংস্কৃতিক শো",
+                chipDining: "বিলাসবহুল অভিজ্ঞতা",
+                cinemasCategory: "সিনেমা হল",
+                cinemasTitle: "ওমানের অফিসিয়াল সিনেমা হল",
+                cinemasSub: "ক্লিক করলেই নতুন ট্যাবে সিনেমার অফিসিয়াল সাইট খুলে যাবে।",
+                btnVox: "VOX ওয়েবসাইটে যান",
+                btnCinepolis: "Cinépolis ওয়েবসাইটে যান",
+                btnNovo: "Novo ওয়েবসাইটে যান",
+                btnBahja: "Al Bahja সাইটে যান",
+                descVox: "মল অব ওমান, সিটি সেন্টার মাস্কাট, কুরুম, সোহার ও সালালাহ।",
+                descCinepolis: "ওমান অ্যাভিনিউ মল (মাস্কাট) ও সালালাহ গ্র্যান্ড মল।",
+                descNovo: "মাস্কাট গ্র্যান্ড মল (MGM)।",
+                descBahja: "মারকাজ আল বাহজা - সিব এবং রুউই।",
+                eventsCategory: "উৎসবের বিশেষ বুকিং",
+                eventsTitle: "অনম উৎসব ও শো টিকিট",
+                btnSadya: "সাদিয়া টিকিট বুক করুন",
+                btnConcert: "শো টিকিট বুক করুন",
+                descSadya: "মাস্কাট শেরাটন হোটেলে অনম সাদিয়া ভোজের টিকিট সরাসরি বুক করুন।",
+                descConcert: "অনম বিশেষ সাংস্কৃতিক নাইট ও কনসার্টের টিকিট বুকিং।",
+                luxuryCategory: "রাজকীয় শিল্প ও অভিজ্ঞতা",
+                luxuryTitle: "রয়্যাল অপেরা হাউস ও বিলাসবহুল স্থান",
+                descOpera: "রয়্যাল অপেরা হাউস মাস্কাটের অফিসিয়াল পোর্টাল।",
+                descBustan: "রিটজ-কার্লটন মাস্কাটে রয়্যাল ডাইনিং বুকিং।",
+                descOmanAir: "ওমান এয়ার ফার্স্ট ও বিজনেস ক্লাস বুকিং।"
+            },
+            ur: {
+                heroBadge: "عمان کا شاہی تفریحی پورٹل",
+                heroTitleMain: "عمان کا پرتعیش تفریحی گائیڈ",
+                heroTitleSub: "براہ راست بکنگ کی ڈائرکٹری",
+                heroDesc: "عمان کے بہترین سنیما گھروں، وی آئی پی لاؤنجز، اونم دعوتوں اور ثقافتی شو کی باضابطہ ویب سائٹس تک براہ راست رسائی۔",
+                chipCinemas: "سنیما پورٹل",
+                chipEvents: "اونم اور ثقافتی شو",
+                chipDining: "پرتعیش تجربات",
+                cinemasCategory: "سنیما گھر",
+                cinemasTitle: "عمان کے باضابطہ سنیما گھر",
+                cinemasSub: "کلک کرنے پر نئی ٹیب میں بلاشبہ باضابطہ سائٹ کھل جائے گی۔",
+                btnVox: "فوکس سنیما سائٹ کھولیں",
+                btnCinepolis: "سنیپولس سائٹ کھولیں",
+                btnNovo: "نووو سنیما سائٹ کھولیں",
+                btnBahja: "ال بہجہ سنیما سائٹ",
+                descVox: "مال آف عمان، سٹی سنٹر مسقط، القرم، صحار اور صلالہ۔",
+                descCinepolis: "عمان ایوینیوز مال (مسقط) اور صلالہ گرینڈ مال۔",
+                descNovo: "مسقط گرینڈ مال (MGM)۔",
+                descBahja: "مرکز البہجہ - السیب اور روئی۔",
+                eventsCategory: "خصوصی تہوار بکنگ",
+                eventsTitle: "اونم کی تقاریب اور شوز",
+                btnSadya: "سادیہ ٹکٹ بک کریں",
+                btnConcert: "شو ٹکٹ بک کریں",
+                descSadya: "شیرٹن ہوٹل مسقط میں اونم سادیہ دعوت کے لیے براہ راست ٹکٹ بک کریں۔",
+                descConcert: "اونم کی ثقافتی شام اور میوزیکل شو کی باضابطہ ٹکٹ۔",
+                luxuryCategory: "شاہی فنون اور اندازِ زیست",
+                luxuryTitle: "رائل اوپیرا ہاؤس اور پرتعیش مقامات",
+                descOpera: "رائل اوپیرا ہاؤس مسقط کا باضابطہ پورٹل۔",
+                descBustan: "رٹز کارلٹن مسقط میں فائن ڈائننگ کی بکنگ۔",
+                descOmanAir: "عمان ایئر کی باضابطہ فرسٹ اور بزنس کلاس بکنگ۔"
+            }
+        };
+
+        function changeLanguage(langKey) {
+            const data = i18n[langKey] || i18n['en'];
+            
+            // Text Replacements
+            document.getElementById('heroBadge').innerText = data.heroBadge;
+            document.getElementById('heroTitleMain').innerText = data.heroTitleMain;
+            document.getElementById('heroTitleSub').innerText = data.heroTitleSub;
+            document.getElementById('heroDesc').innerText = data.heroDesc;
+            
+            document.getElementById('chipCinemas').innerText = data.chipCinemas;
+            document.getElementById('chipEvents').innerText = data.chipEvents;
+            document.getElementById('chipDining').innerText = data.chipDining;
+
+            document.getElementById('cinemasCategory').innerText = data.cinemasCategory;
+            document.getElementById('cinemasTitle').innerText = data.cinemasTitle;
+            document.getElementById('cinemasSub').innerText = data.cinemasSub;
+
+            document.getElementById('btnVox').innerText = data.btnVox;
+            document.getElementById('btnCinepolis').innerText = data.btnCinepolis;
+            document.getElementById('btnNovo').innerText = data.btnNovo;
+            document.getElementById('btnBahja').innerText = data.btnBahja;
+
+            document.getElementById('descVox').innerText = data.descVox;
+            document.getElementById('descCinepolis').innerText = data.descCinepolis;
+            document.getElementById('descNovo').innerText = data.descNovo;
+            document.getElementById('descBahja').innerText = data.descBahja;
+
+            document.getElementById('eventsCategory').innerText = data.eventsCategory;
+            document.getElementById('eventsTitle').innerText = data.eventsTitle;
+            document.getElementById('btnSadya').innerText = data.btnSadya;
+            document.getElementById('btnConcert').innerText = data.btnConcert;
+            document.getElementById('descSadya').innerText = data.descSadya;
+            document.getElementById('descConcert').innerText = data.descConcert;
+
+            document.getElementById('luxuryCategory').innerText = data.luxuryCategory;
+            document.getElementById('luxuryTitle').innerText = data.luxuryTitle;
+            document.getElementById('descOpera').innerText = data.descOpera;
+            document.getElementById('descBustan').innerText = data.descBustan;
+            document.getElementById('descOmanAir').innerText = data.descOmanAir;
+
+            // RTL Handling for Arabic and Urdu
+            if (langKey === 'ar' || langKey === 'ur') {
+                document.documentElement.setAttribute('dir', 'rtl');
+                document.body.className = (langKey === 'ar') ? 'font-arabic selection:bg-gold-500 selection:text-obsidian-950' : 'font-urdu selection:bg-gold-500 selection:text-obsidian-950';
+            } else {
+                document.documentElement.setAttribute('dir', 'ltr');
+                if (langKey === 'ml') document.body.className = 'font-malayalam selection:bg-gold-500 selection:text-obsidian-950';
+                else if (langKey === 'hi') document.body.className = 'font-hindi selection:bg-gold-500 selection:text-obsidian-950';
+                else if (langKey === 'ta') document.body.className = 'font-tamil selection:bg-gold-500 selection:text-obsidian-950';
+                else if (langKey === 'bn') document.body.className = 'font-bengali selection:bg-gold-500 selection:text-obsidian-950';
+                else document.body.className = 'font-sans selection:bg-gold-500 selection:text-obsidian-950';
+            }
+        }
+    </script>
+</body>
+</html>
